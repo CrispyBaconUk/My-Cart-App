@@ -1,0 +1,3 @@
+<aura:event type="APPLICATION" description="Application Event Template">
+	<aura:attribute name="item" type="object" description="Item to add"/>
+</aura:event>

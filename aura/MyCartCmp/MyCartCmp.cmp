@@ -1,0 +1,50 @@
+<aura:component access="GLOBAL" >
+    
+	<!-- Working Variables -->
+    <aura:attribute name="items" type="object[]" default="[]"/>
+
+    <!-- Listen for this custom event -->
+    <aura:handler event="c:AddItemToCartEvt" action="{!c.addItem}"/>
+    
+    <article class="slds-card">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media--center slds-has-flexi-truncate">
+                <div class="slds-media__body slds-truncate">
+                    <span class="slds-text-heading--small">My Cart</span>
+                </div>
+            </header>
+        </div>
+        <div class="slds-card__body">
+            <div class="slds-col--padded slds-scrollable--y" style="max-height:400px">
+                <table class="slds-table slds-table--bordered slds-table--cell-buffer">
+                    <!-- VF equilivant of apex:repeat -->
+                    <aura:iteration items="{!v.items}" var="item">
+                        <tr>
+                            <th scope="row" data-label="Action">
+                            <button class="slds-button slds-button--brand" onclick="{!c.removeItem}" id="{!item.Id}">Remove</button>
+                            </th>
+                        	<th scope="row" data-label="Name">
+                                <ui:outputText value="{!item.Name}" />
+                            </th>
+                            <th scope="row" data-label="Price">
+                                <ui:outputText value="{!item.Price__c}" />
+                            </th>
+                        </tr>
+                    </aura:iteration>
+                    <aura:if isTrue="{!v.items.length == 0}">
+                        <tr>
+                            <h3 class="slds-section-title--divider slds-text-align--center">Empty</h3>
+                        </tr>
+                    </aura:if>
+                </table>
+            </div>
+        </div>
+        <div class="slds-card__footer slds-grid slds-grid--align-center">
+            <div>
+        		<div>
+                	<button class="slds-button slds-button--brand" onclick="{!c.checkout}">Checkout</button>
+            	</div>
+            </div>
+        </div>
+    </article>
+</aura:component>
